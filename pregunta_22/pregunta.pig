@@ -22,3 +22,17 @@ $ pig -x local -f pregunta.pig
         >>> Escriba su respuesta a partir de este punto <<<
 */
 
+Tabla = LOAD 'data.csv' USING PigStorage(',')
+    AS (
+        Id:int,
+        Nombre:chararray,
+        Apellido:chararray,
+        Fecha:chararray,
+        Color:chararray,
+        Cantidad:int
+    );
+
+filtrado = FILTER Tabla BY Color matches '.*n$';
+salida = FOREACH filtrado generate Nombre,Color;
+
+STORE salida INTO 'output' USING PigStorage(',');

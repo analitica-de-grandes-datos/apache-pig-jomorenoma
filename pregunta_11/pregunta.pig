@@ -33,3 +33,16 @@ $ pig -x local -f pregunta.pig
         >>> Escriba su respuesta a partir de este punto <<<
 */
 
+Tabla = LOAD 'data.csv' USING PigStorage(',')
+    AS (
+        Id:int,
+        Nombre:chararray,
+        Apellido:chararray,
+        Fecha:chararray,
+        Color:chararray,
+        Cantidad:int
+    );
+Base = FOREACH Tabla generate Apellido, UPPER(Apellido) AS Mayus, LOWER(Apellido) AS Minus;
+salida = Order Base By Apellido;
+
+STORE salida INTO 'output' USING PigStorage(',');

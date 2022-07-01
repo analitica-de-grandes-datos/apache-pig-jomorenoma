@@ -19,4 +19,15 @@ $ pig -x local -f pregunta.pig
         >>> Escriba su respuesta a partir de este punto <<<
 */
 
+Tabla = LOAD 'data.csv' USING PigStorage(',')
+    AS (
+        Id:int,
+        Nombre:chararray,
+        Apellido:chararray,
+        Fecha:chararray,
+        Color:chararray,
+        Cantidad:int
+    );
+salida = FOREACH Tabla GENERATE SUBSTRING(Fecha,5,7); 
 
+STORE salida INTO 'output' USING PigStorage(',');
