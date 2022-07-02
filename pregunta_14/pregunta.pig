@@ -20,3 +20,17 @@ $ pig -x local -f pregunta.pig
 
 */
 
+Tabla = LOAD 'data.csv' USING PigStorage(',')
+    AS (
+        Id:int,
+        Nombre:chararray,
+        Apellido:chararray,
+        Fecha:chararray,
+        Color:chararray,
+        Cantidad:int
+    );
+
+filtrado = FILTER Tabla BY NOT Color matches '[b].*';
+salida = FOREACH filtrado generate Color;
+
+STORE salida INTO 'output' USING PigStorage(',');
