@@ -30,7 +30,7 @@ Tabla = LOAD 'data.csv' USING PigStorage(',')
         Cantidad:int
     );
 
-salida = FOREACH Tabla Generate INDEXOF(Nombre,'ia');
+salida = FOREACH Tabla Generate INDEXOF(Nombre,'ia',1);
 
 STORE salida INTO 'output' USING PigStorage(',');
 

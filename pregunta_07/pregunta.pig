@@ -22,7 +22,7 @@ Tabla = LOAD 'data.tsv' USING PigStorage('\t')
         col3:MAP[]
     );
 
-Cont = FOREACH Tabla GENERATE col1, (int)COUNT(col2) as cont2, (int)SIZE(col3) as cont3;
+Cont = FOREACH Tabla GENERATE col1, COUNT(col2) as cont2, SIZE(col3) as cont3;
 salida = ORDER Cont BY col1, cont2, cont3;
 
 STORE salida INTO 'output' USING PigStorage(',');

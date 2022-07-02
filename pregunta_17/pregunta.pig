@@ -29,7 +29,8 @@ Tabla = LOAD 'data.csv' USING PigStorage(',')
         Cantidad:int
     );
 
-filtrado = FILTER Tabla BY Color matches 'blue' OR Color matches 'black';
+filtrado = FILTER Tabla BY Color IN ('blue','black');
 salida = FOREACH filtrado generate Nombre, Color;
 
 STORE salida INTO 'output' USING PigStorage(',');
+

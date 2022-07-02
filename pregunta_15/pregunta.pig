@@ -33,4 +33,5 @@ Tabla = LOAD 'data.csv' USING PigStorage(',')
 filtrado = FILTER Tabla BY Color matches 'blue' AND Nombre matches '[Z].*';
 salida = FOREACH filtrado generate Nombre, Color;
 
-STORE salida INTO 'output' USING PigStorage(',');
+STORE salida INTO 'output' USING PigStorage(' ');
+
